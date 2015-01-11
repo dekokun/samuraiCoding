@@ -171,6 +171,9 @@ abstract class MonteCarlo extends Rule
     }
 
     /**
+     * どの領主と何回ずつ交渉するかをランダムに決める
+     * 5個の投票権を横に並べて、その間に領主の仕切りをランダムで入れることで
+     * どの領主が何回交渉するかが決まる
      * @param $count
      * @param \Lords $lords
      * @return array
