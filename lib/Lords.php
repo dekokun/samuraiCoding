@@ -121,18 +121,38 @@ class Lords implements ArrayAccess, Iterator, Countable {
     public function rewind()  {
         reset($this->lords);
     }
+
+    /**
+     * @return \Lord
+     */
     public function current() {
         return current($this->lords);
     }
+
+    /**
+     * @return int
+     */
     public function key() {
         return key($this->lords);
     }
+
+    /**
+     * @return \Lord
+     */
     public function next() {
         return next($this->lords);
     }
+
+    /**
+     * @return bool
+     */
     public function valid() {
         return ($this->current() !== false);
     }
+
+    /**
+     * @return int
+     */
     public function count() {
         return count($this->lords);
     }
@@ -148,7 +168,7 @@ class Lords implements ArrayAccess, Iterator, Countable {
     /**
      * オフセットを取得する
      * @param mixed $offset 調べたいオフセット
-     * @return mixed 指定したオフセットの値
+     * @return \Lord 指定したオフセットの値
      */
     public function offsetGet ($offset) {
         return $this->lords[$offset];
@@ -156,7 +176,7 @@ class Lords implements ArrayAccess, Iterator, Countable {
     /**
      * オフセットを設定する
      * @param mixed $offset 調べたいオフセット
-     * @param mixed $value 設定したい値
+     * @param \Lord $value 設定したい値
      */
     public function offsetSet ($offset ,$value ) {
         $this->lords[$offset] = $value;
