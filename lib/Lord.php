@@ -89,6 +89,10 @@ class Lord {
         return $this->negotiated;
     }
 
+    public function resetNegotiationCount() {
+        return $this->negotiationCount = 0;
+    }
+
     public function getNegotiationCount() {
         return $this->negotiationCount;
     }

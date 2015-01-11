@@ -83,6 +83,12 @@ class Lords implements ArrayAccess, Iterator, Countable {
         return min($this->getMilitaryCounts());
     }
 
+    public function resetNegotiationCount() {
+        foreach($this->lords as $lords) {
+            $lords->resetNegotiationCount();
+        }
+    }
+
     /**
      * @return \Lord
      */
