@@ -4,8 +4,8 @@ namespace Rule;
 
 abstract class MonteCarlo extends Rule
 {
-    const NIGHT_TRIAL_COUNT = 26;
-    const DAY_TIME_TRIAL_RATE = 18;
+    const NIGHT_TRIAL_COUNT = 100;
+    const DAY_TIME_TRIAL_RATE = 6;
 
     public function result(\Lords $lords, \Turn $turn)
     {

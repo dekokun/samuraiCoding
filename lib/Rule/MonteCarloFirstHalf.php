@@ -4,7 +4,7 @@ namespace Rule;
 
 class MonteCarloFirstHalf extends MonteCarlo
 {
-    const DAY_TIME_TRIAL_RATE = 50;
+    const DAY_TIME_TRIAL_RATE = 20;
     protected function doEvaluate(\Lords $lords, \Turn $turn)
     {
         if ($turn->getNextTurn() < 4) {
