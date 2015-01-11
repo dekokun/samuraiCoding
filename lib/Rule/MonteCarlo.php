@@ -4,7 +4,7 @@ namespace Rule;
 
 abstract class MonteCarlo extends Rule
 {
-    const NIGHT_TRIAL_COUNT = 100;
+    const NIGHT_TRIAL_COUNT = 90;
     const DAY_TIME_TRIAL_RATE = 6;
 
     private $intermediateResult = [0, 0, 0, 0];
