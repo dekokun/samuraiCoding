@@ -45,13 +45,10 @@ class Game {
                 // resetしたらなぜか弱くなった…理由不明…
                 // $this->lords->resetEstimatedNegotiationCount();
             }
-            $rule = $this->ruleSelector
-                ->choice($this->lords, $this->turn);
-            if ($this->turn->getNextTurn() === 6) {
-                $result = $rule->storeIntermediateResult($this->lords);
-                record($result);
-            }
-            $lords = $rule->result($this->lords, $this->turn);
+            $lords
+                = $this->ruleSelector
+                ->choice($this->lords, $this->turn)
+                ->result($this->lords, $this->turn);
             $this->io->outPutArray($lords->toArray());
         }
 
