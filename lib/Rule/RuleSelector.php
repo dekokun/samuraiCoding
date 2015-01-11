@@ -21,7 +21,7 @@ class RuleSelector {
         $selectedRule = $this->rules[array_search(
             max($evaluatedValues), $evaluatedValues
         )];
-        logging('selected rule: ' . get_class($selectedRule));
+        log('selected rule: ' . get_class($selectedRule));
         return $selectedRule;
     }
 }

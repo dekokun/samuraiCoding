@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . '/vendor/autoload.php');
 
-function logging($message) {
+function log($message) {
     $message = var_export($message, true) . PHP_EOL;
     fputs(STDERR, $message);
 }
@@ -17,8 +17,8 @@ if (isset($argv[1]) && $argv[1] == 'hoge') {
     xhprof_enable();
     register_shutdown_function('__xhprof_save');
 }
-logging('start');
+log('start');
 $game = new Game();
-logging('main');
+log('main');
 $game->main();
-logging('end');
+log('end');

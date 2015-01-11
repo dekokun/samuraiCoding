@@ -16,7 +16,7 @@ abstract class MonteCarlo extends Rule
         } else {
             $trialCount = static::NIGHT_TRIAL_COUNT;
         }
-        logging('count :: ' . $trialCount);
+        log('count :: ' . $trialCount);
         for ($i = 0; $i < $trialCount; $i++) {
             // 過去の実績を足す
             $allRemainPoints = $this->allRemainPoints($lords, $turn);
