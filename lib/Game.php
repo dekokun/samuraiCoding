@@ -76,7 +76,7 @@ class Game {
             if ($allDateCount) {
                 foreach ($this->lords as $i => $_) {
                     if ($allDateCount) {
-                        $this->lords[$i]->setDated((integer)$dated[$i] / $allDateCount);
+                        $this->lords[$i]->setNegotiated((integer)$dated[$i] / $allDateCount);
                     }
                 }
             }
