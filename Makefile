@@ -1,4 +1,9 @@
-.PHONY : zip
+.PHONY : clean
+default: clean dekokunPhp.zip
 
-zip:
-	rm dekokun.zip && zip -r dekokun.zip . -x 'vendor/symfony/*' 'vendor/facebook/*' 'vendor/phpunit/*' '.git/*' '.idea/*'
+
+dekokunPhp.zip:
+	zip -r dekokunPhp.zip . -x 'vendor/symfony/*' 'vendor/facebook/*' 'vendor/phpunit/*' '.git/*' '.idea/*'
+
+clean:
+	rm -f dekokunPhp.zip
