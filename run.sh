@@ -1,1 +1,1 @@
-php5 main.php
+php5 main.php
