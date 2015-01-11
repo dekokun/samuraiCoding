@@ -7,6 +7,8 @@ abstract class MonteCarlo extends Rule
     const NIGHT_TRIAL_COUNT = 100;
     const DAY_TIME_TRIAL_RATE = 6;
 
+    private $intermediateResult = [0, 0, 0, 0];
+
     public function result(\Lords $lords, \Turn $turn)
     {
         $myPointChoiceCombination = $this->myPointChoiceCombination($turn);
@@ -85,10 +87,25 @@ abstract class MonteCarlo extends Rule
         // $pointsは次のターンの自分の行動分の得点が含まれていないため、その代わりに自分が選んだ行動の得点を足す
         $points = $this->reflectMyChoice($points, $choice);
         $result = $this->getPlayerMilitaryCounts($points, $lords);
+        $result = array_map(
+            function($val1, $val2) {
+                return $val1 + $val2;
+            },
+            $result,
+            $this->intermediateResult
+        );
         if ($result[0] === max($result)) {
             return true;
         }
         return false;
+    }
+
+    public function storeIntermediateResult(\Lords $lords) {
+        $points = [];
+        foreach($lords as $index => $lord) {
+            $points[$index] = $lord->getRevealedScores();
+        }
+        $this->intermediateResult = $this->getPlayerMilitaryCounts($points, $lords);
     }
 
     /**
@@ -100,6 +117,9 @@ abstract class MonteCarlo extends Rule
      */
     private function getPlayerMilitaryCounts($points, $lords) {
         $result = array_fill(0, 4, 0);
+        if (rand(0, 1000) === 0) {
+            record($points);
+        }
         foreach($points as $lordIndex => $lordPoints) {
             $maxPoint = max($lordPoints);
             $minPoint = min($lordPoints);

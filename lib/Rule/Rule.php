@@ -20,4 +20,5 @@ abstract class Rule {
      * @return \Lords
      */
     abstract public function result(\Lords $lords, \Turn $turn);
+    public function storeIntermediateResult(\Lords $lords) {}
 }
