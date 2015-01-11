@@ -51,8 +51,8 @@ class Turn {
             ];
         }
         return [
-            static::NIGHT => ($remainTurn + 1) / 2,
-            static::DAY_TIME => (($remainTurn + 1) / 2) - 1
+            static::NIGHT => ($remainTurn + 1) / 2 - 1,
+            static::DAY_TIME => (($remainTurn + 1) / 2)
         ];
     }
     /**
