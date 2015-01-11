@@ -117,9 +117,6 @@ abstract class MonteCarlo extends Rule
      */
     private function getPlayerMilitaryCounts($points, $lords) {
         $result = array_fill(0, 4, 0);
-        if (rand(0, 1000) === 0) {
-            record($points);
-        }
         foreach($points as $lordIndex => $lordPoints) {
             $maxPoint = max($lordPoints);
             $minPoint = min($lordPoints);
