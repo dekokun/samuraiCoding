@@ -177,8 +177,8 @@ abstract class MonteCarlo extends Rule
      */
     public function getWhichLord($count, \Lords $lords)
     {
-        $result = array_fill(0, 6, 0);
         $lordCount = count($lords);
+        $result = array_fill(0, $lordCount, 0);
         // array_randがキーを順番通りに出力する性質を使用
         $divisionPoses = array_rand(
             array_fill(0, $lordCount + $count - 1, 0),
