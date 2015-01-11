@@ -83,8 +83,23 @@ abstract class MonteCarlo extends Rule
 
     public function isTop(\Lords $lords, array $points, array $choice, $firstFlag) {
         // $pointsは次のターンの自分の行動分の得点が含まれていないため、その代わりに自分が選んだ行動の得点を足す
-        $result = array_fill(0, 4, 0);
         $points = $this->reflectMyChoice($points, $choice);
+        $result = $this->getPlayerMilitaryCounts($points, $lords);
+        if ($result[0] === max($result)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 各playerが何ポイントもらえているかを返す
+     * なお、0番目のプレイヤーが自分である
+     * @param array $points
+     * @param \Lords $lords
+     * @return array
+     */
+    public function getPlayerMilitaryCounts($points, $lords) {
+        $result = array_fill(0, 4, 0);
         foreach($points as $lordIndex => $lordPoints) {
             $maxPoint = max($lordPoints);
             $minPoint = min($lordPoints);
@@ -100,10 +115,7 @@ abstract class MonteCarlo extends Rule
                 $result[$index] -= $loosePoint;
             }
         }
-        if ($result[0] === max($result)) {
-            return true;
-        }
-        return false;
+        return $result;
     }
 
     private function transverseMatrix($points) {
