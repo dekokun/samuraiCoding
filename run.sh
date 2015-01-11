@@ -1,1 +1,1 @@
-php5 SampleAI.php
+php5 main.php
