@@ -15,9 +15,9 @@ class Game {
      */
     protected $turn;
     /**
-     * @var Heroines
+     * @var Lords
      */
-    protected $heroines;
+    protected $lords;
     /**
      * @var \Rule\RuleSelector
      */
@@ -39,11 +39,11 @@ class Game {
 
         for ($i = 0; $i < $this->setting->maxTurn; $i++) {
             $this->readData();
-            $heroines
+            $lords
                 = $this->ruleSelector
-                ->choice($this->heroines, $this->turn)
-                ->result($this->heroines, $this->turn);
-            $this->io->outPutArray($heroines->toArray());
+                ->choice($this->lords, $this->turn)
+                ->result($this->lords, $this->turn);
+            $this->io->outPutArray($lords->toArray());
         }
 
     }
@@ -52,31 +52,31 @@ class Game {
         $this->setting->setSettingOne($this->io->getInArray());
 
         $this->setting->setSettingTwo($this->io->getInArray());
-        $heroines = [];
-        foreach ($this->setting->enthusiasms as $index => $enthusiasm) {
-            array_push($heroines, new Heroine($index, (integer)$enthusiasm));
+        $lords = [];
+        foreach ($this->setting->militaryCounts as $index => $militaryCount) {
+            array_push($lords, new Lord($index, (integer)$militaryCount));
         }
-        $this->heroines = new Heroines($heroines);
+        $this->lords = new Lords($lords);
     }
 
     private function readData() {
         list($turn, $day) = $this->io->getInArray();
         $this->turn = new Turn($turn, $day);
-        foreach($this->heroines as $i => $_) {
+        foreach($this->lords as $i => $_) {
             $revealedScores = $this->io->getInArray();
-            $this->heroines[$i]->setRevealedScores($revealedScores);
+            $this->lords[$i]->setRevealedScores($revealedScores);
         }
         $realScores = $this->io->getInArray();
-        foreach($this->heroines as $i => $_) {
-            $this->heroines[$i]->setRealScore((integer)$realScores[$i]);
+        foreach($this->lords as $i => $_) {
+            $this->lords[$i]->setRealScore((integer)$realScores[$i]);
         }
-        if ($this->turn->previousTurnIsHoliday()) {
+        if ($this->turn->previousTurnIsNight()) {
             $dated = $this->io->getInArray();
             $allDateCount = array_sum($dated);
             if ($allDateCount) {
-                foreach ($this->heroines as $i => $_) {
+                foreach ($this->lords as $i => $_) {
                     if ($allDateCount) {
-                        $this->heroines[$i]->setDated((integer)$dated[$i] / $allDateCount);
+                        $this->lords[$i]->setDated((integer)$dated[$i] / $allDateCount);
                     }
                 }
             }

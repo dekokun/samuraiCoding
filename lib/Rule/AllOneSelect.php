@@ -3,19 +3,19 @@
 namespace Rule;
 
 class AllOneSelect extends Rule {
-    protected function doEvaluate(\Heroines $heroines, \Turn $turn) {
+    protected function doEvaluate(\Lords $lords, \Turn $turn) {
         if ($turn->getNextTurn() === 1) {
             return 0;
         }
         return 0;
     }
-    public function result(\Heroines $heroines, \Turn $turn) {
-        $resultHeroines = [];
-        $maxHeroines = $heroines->getMaxEnthusiasmHeroines();
-        $selectedHeroine = $maxHeroines->getRandomHeroine();
+    public function result(\Lords $lords, \Turn $turn) {
+        $resultLords = [];
+        $maxLords = $lords->getMaxMilitaryCountsLord();
+        $selectedLord = $maxLords->getRandomLord();
         foreach($turn->dayIter() as $_) {
-            $resultHeroines[] = $selectedHeroine;
+            $resultLords[] = $selectedLord;
         }
-        return new \Heroines($resultHeroines);
+        return new \Lords($resultLords);
     }
 }

@@ -10,13 +10,13 @@ class RuleSelector {
     }
 
     /**
-     * @param \Heroines $heroines
+     * @param \Lords $lords
      * @param \Turn $turn
      * @return Rule
      */
-    public function choice(\Heroines $heroines, \Turn $turn) {
-        $evaluatedValues = array_map(function(Rule $rule) use($heroines, $turn) {
-            return $rule->evaluate($heroines, $turn);
+    public function choice(\Lords $lords, \Turn $turn) {
+        $evaluatedValues = array_map(function(Rule $rule) use($lords, $turn) {
+            return $rule->evaluate($lords, $turn);
         }, $this->rules);
         $selectedRule = $this->rules[array_search(
             max($evaluatedValues), $evaluatedValues

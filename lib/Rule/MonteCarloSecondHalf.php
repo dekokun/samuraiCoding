@@ -4,7 +4,7 @@ namespace Rule;
 
 class MonteCarloSecondHalf extends MonteCarlo
 {
-    protected function doEvaluate(\Heroines $heroines, \Turn $turn)
+    protected function doEvaluate(\Lords $lords, \Turn $turn)
     {
         if ($turn->getNextTurn() >= 4) {
             return 50;
@@ -19,9 +19,9 @@ class MonteCarloSecondHalf extends MonteCarlo
     public function myPointChoiceCombination(\Turn $turn)
     {
         static $combies;
-        if ($turn->nextTurnIsHoliday()) {
-            if (! isset($combies[\Turn::HOLIDAY])) {
-                $combies[\Turn::HOLIDAY] = [
+        if ($turn->nextTurnIsNight()) {
+            if (! isset($combies[\Turn::NIGHT])) {
+                $combies[\Turn::NIGHT] = [
                     [4, 0, 0, 0, 0, 0, 0, 0],
                     [2, 2, 0, 0, 0, 0, 0, 0],
                     [2, 0, 2, 0, 0, 0, 0, 0],
@@ -60,10 +60,10 @@ class MonteCarloSecondHalf extends MonteCarlo
                     [0, 0, 0, 0, 0, 0, 0, 4],
                 ];
             }
-            return $combies[\Turn::HOLIDAY];
+            return $combies[\Turn::NIGHT];
         }
-        if (! isset($combies[\Turn::WEEKDAY])) {
-            $combies[\Turn::WEEKDAY] = [
+        if (! isset($combies[\Turn::DAY_TIME])) {
+            $combies[\Turn::DAY_TIME] = [
                 [5, 0, 0, 0, 0, 0, 0, 0],
                 [4, 1, 0, 0, 0, 0, 0, 0],
                 [4, 0, 1, 0, 0, 0, 0, 0],
@@ -770,6 +770,6 @@ class MonteCarloSecondHalf extends MonteCarlo
                 [0, 0, 0, 0, 0, 0, 0, 5],
             ];
         }
-        return $combies[\Turn::WEEKDAY];
+        return $combies[\Turn::DAY_TIME];
     }
 }

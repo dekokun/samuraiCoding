@@ -3,16 +3,16 @@
 class GameSettings {
     public $maxTurn;
     public $numOfPlayers;
-    public $numOfHeroines;
-    public $enthusiasms;
+    public $numOfLords;
+    public $militaryCounts;
 
     public function setSettingOne(array $input) {
         $this->maxTurn = $input[0];
         $this->numOfPlayers = $input[1];
-        $this->numOfHeroines = $input[2];
+        $this->numOfLords = $input[2];
     }
 
     public function setSettingTwo(array $input) {
-        $this->enthusiasms = $input;
+        $this->militaryCounts = $input;
     }
 }

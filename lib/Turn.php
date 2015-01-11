@@ -1,9 +1,9 @@
 <?php
 
 class Turn {
-    const WEEKDAY = 'W';
-    const HOLIDAY = 'H';
-    const ALL_TURN = 10;
+    const DAY_TIME = 'D';
+    const NIGHT = 'N';
+    const ALL_TURN = 9;
 
     protected $nextTurn;
     protected $nextDayKind;
@@ -11,7 +11,7 @@ class Turn {
     public function __construct($turn, $dayKind = null) {
         $this->nextTurn = intval($turn);
         if ($dayKind === null) {
-            $dayKind = ($turn % 2 === 0) ? static::HOLIDAY : static::WEEKDAY;
+            $dayKind = ($turn % 2 === 0) ? static::NIGHT : static::DAY_TIME;
         }
         $this->nextDayKind = $dayKind;
     }
@@ -32,8 +32,8 @@ class Turn {
     /**
      * @return int
      */
-    public function holidayCountToNow() {
-        if ($this->nextTurnIsHoliday()) {
+    public function dayTimeCountToNow() {
+        if ($this->nextTurnIsNight()) {
             return ($this->nextTurn - 2) / 2;
         }
         return ($this->nextTurn - 1) / 2;
@@ -46,45 +46,45 @@ class Turn {
         $remainTurn = (static::ALL_TURN - $this->getNextTurn()) + 1;
         if ($remainTurn % 2 === 0) {
             return [
-                static::HOLIDAY => $remainTurn / 2,
-                static::WEEKDAY => $remainTurn / 2
+                static::NIGHT => $remainTurn / 2,
+                static::DAY_TIME => $remainTurn / 2
             ];
         }
         return [
-            static::HOLIDAY => ($remainTurn + 1) / 2,
-            static::WEEKDAY => (($remainTurn + 1) / 2) - 1
+            static::NIGHT => ($remainTurn + 1) / 2,
+            static::DAY_TIME => (($remainTurn + 1) / 2) - 1
         ];
     }
     /**
      * @return bool
      */
-    public function nextTurnIsHoliday() {
-        return ($this->nextDayKind === static::HOLIDAY);
+    public function nextTurnIsNight() {
+        return ($this->nextDayKind === static::NIGHT);
     }
 
     /**
      * @return bool
      */
-    public function nextTurnIsWeekDay() {
-        return (! $this->nextTurnIsHoliday());
+    public function nextTurnIsDayTime() {
+        return (! $this->nextTurnIsNight());
     }
 
     /**
      * @return bool
      */
-    public function previousTurnIsHoliday() {
-        return (! $this->nextTurnIsHoliday());
+    public function previousTurnIsNight() {
+        return (! $this->nextTurnIsNight());
     }
 
     /**
      * @return bool
      */
-    public function previousTurnIsWeekDay() {
-        return (! $this->nextTurnIsHoliday());
+    public function previousTurnIsDayTime() {
+        return (! $this->nextTurnIsNight());
     }
 
     public function nextDayCount() {
-        if ($this->nextTurnIsWeekDay()) {
+        if ($this->nextTurnIsDayTime()) {
             return 5;
         }
         return 2;

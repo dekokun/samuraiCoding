@@ -1,6 +1,6 @@
 <?php
 
-class Heroine {
+class Lord {
     private $enthusiasm;
     /**
      * @var int[]
@@ -61,7 +61,7 @@ class Heroine {
     /**
      * @return int
      */
-    public function getEnthusiasm() {
+    public function getMilitaryCount() {
         return $this->enthusiasm;
     }
 
@@ -89,7 +89,7 @@ class Heroine {
         return $this->dated;
     }
 
-    public function getDateCount() {
+    public function getNegotiationCount() {
         return $this->dateCount;
     }
     public function setDated($dated) {

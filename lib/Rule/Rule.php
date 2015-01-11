@@ -4,20 +4,20 @@ namespace Rule;
 
 abstract class Rule {
     /**
-     * @param \Heroines $heroines
+     * @param \Lords $lords
      * @param \Turn $turn
      * @return int
      */
-    public function evaluate(\Heroines $heroines, \Turn $turn) {
-        return $this->doEvaluate($heroines, $turn);
+    public function evaluate(\Lords $lords, \Turn $turn) {
+        return $this->doEvaluate($lords, $turn);
     }
 
-    abstract protected function doEvaluate(\Heroines $heroines, \Turn $turn);
+    abstract protected function doEvaluate(\Lords $lords, \Turn $turn);
 
     /**
-     * @param \Heroines $heroines
+     * @param \Lords $lords
      * @param \Turn $turn
-     * @return \Heroines
+     * @return \Lords
      */
-    abstract public function result(\Heroines $heroines, \Turn $turn);
+    abstract public function result(\Lords $lords, \Turn $turn);
 }
