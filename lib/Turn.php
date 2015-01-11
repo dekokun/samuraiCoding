@@ -22,6 +22,10 @@ class Turn {
         }
     }
 
+    public function getAggregateTurn() {
+        return 6;
+    }
+
     /**
      * @return int
      */
@@ -40,9 +44,25 @@ class Turn {
     }
 
     /**
+     * 中間集計までの残りターンを昼と夜で返す
      * @return int[]
      */
-    public function getRemainTurns() {
+    public function getRemainTurnsUntilNextAggreggate() {
+        $remainTurns = $this->getRemainTurns();
+        // 中間集計が過ぎている場合はそのまま残りターンを返す
+        if ($this->nextTurn >= $this->getAggregateTurn()) {
+            return $remainTurns;
+        }
+        return array_map(function($value) {
+            // 中間集計が終わった後は夜も昼も2ターンずつあるため
+            return $value - 2;
+        }, $remainTurns);
+    }
+
+    /**
+     * @return int[]
+     */
+    private function getRemainTurns() {
         $remainTurn = (static::ALL_TURN - $this->getNextTurn()) + 1;
         if ($remainTurn % 2 === 0) {
             return [
