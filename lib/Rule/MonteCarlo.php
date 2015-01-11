@@ -18,8 +18,8 @@ abstract class MonteCarlo extends Rule
         }
         record('count :: ' . $trialCount);
         for ($i = 0; $i < $trialCount; $i++) {
-            // 過去の実績を足す
             $allRemainPoints = $this->allRemainPoints($lords, $turn);
+            // 過去の実績を足す
             foreach($lords as $lord) {
                 // 休日のデートを加味したスコアは自分(0番)のものは完全にわかっているためそれを足す
                 $allRemainPoints[0][$lord->getIndex()]
@@ -38,6 +38,9 @@ abstract class MonteCarlo extends Rule
             }
             $firstFlag = true;
             $transversePoints = $this->transverseMatrix($allRemainPoints);
+
+            // 今回のターンで自分の行いうる行動それぞれについて、自分が優勝するかどうかを判定して
+            // 優勝回数を足していく
             foreach ($myPointChoiceCombination as $j => $choice) {
                 if ($this->isTop($lords, $transversePoints, $choice, $firstFlag)) {
                     $topCounts[$j] += 1;
@@ -136,6 +139,12 @@ abstract class MonteCarlo extends Rule
         return [$me, $p1, $p2, $p3];
     }
 
+    /**
+     * 残りのターンをランダムでどこにどれだけ振り込むかを計算する
+     * @param \Lords $lords
+     * @param \Turn $turn
+     * @return array
+     */
     public function getRemainPoints(\Lords $lords, \Turn $turn)
     {
         $remainActionCounts = $this->getRemainActionCounts($turn->getRemainTurns());
@@ -144,6 +153,7 @@ abstract class MonteCarlo extends Rule
         );
         $nightPoints = array_map(
             function ($value) {
+                // 夜は昼の2倍ポイントがもらえるため
                 return $value * 2;
             },
             $this->getWhichLord(
@@ -160,6 +170,11 @@ abstract class MonteCarlo extends Rule
         return $allPoints;
     }
 
+    /**
+     * 昼と夜、それぞれ何回のアクション回数が残っているかを計算
+     * @param array $remainTurns
+     * @return array
+     */
     private function getRemainActionCounts(array $remainTurns)
     {
         $remainHolidayActionCount = $remainTurns[\Turn::NIGHT] * 2;
