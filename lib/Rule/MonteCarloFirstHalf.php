@@ -8,7 +8,7 @@ class MonteCarloFirstHalf extends MonteCarlo
     protected function doEvaluate(\Lords $lords, \Turn $turn)
     {
         if ($turn->getNextTurn() < 4) {
-            return 50;
+            return 0;
         }
         return 0;
     }
