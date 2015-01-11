@@ -42,7 +42,8 @@ class Game {
             // 6ターン目から一度情報が新しくなるためデート回数はリセットしておく
             if ($this->turn->getNextTurn() === 6) {
                 record('resetted');
-//                $this->lords->resetEstimatedNegotiationCount();
+                // resetしたらなぜか弱くなった…理由不明…
+                // $this->lords->resetEstimatedNegotiationCount();
             }
             $lords
                 = $this->ruleSelector
