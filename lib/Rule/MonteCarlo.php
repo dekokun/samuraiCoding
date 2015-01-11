@@ -98,7 +98,7 @@ abstract class MonteCarlo extends Rule
      * @param \Lords $lords
      * @return array
      */
-    public function getPlayerMilitaryCounts($points, $lords) {
+    private function getPlayerMilitaryCounts($points, $lords) {
         $result = array_fill(0, 4, 0);
         foreach($points as $lordIndex => $lordPoints) {
             $maxPoint = max($lordPoints);
