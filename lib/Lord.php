@@ -7,8 +7,8 @@ class Lord {
      */
     private $revealedScores;
     private $realScore;
-    private $dated;
-    private $dateCount = 0;
+    private $negotiated;
+    private $negotiationCount = 0;
     private $index;
 
     function __construct(
@@ -22,7 +22,7 @@ class Lord {
         $this->enthusiasm = $enthusiasm;
         $this->revealedScores = $revealedScores;
         $this->realScore = $realScore;
-        $this->dated = $dated;
+        $this->negotiated = $dated;
     }
 
     public function getIndex() {
@@ -85,16 +85,16 @@ class Lord {
         $this->realScore = $realScore;
     }
 
-    public function getDated() {
-        return $this->dated;
+    public function getNegotiated() {
+        return $this->negotiated;
     }
 
     public function getNegotiationCount() {
-        return $this->dateCount;
+        return $this->negotiationCount;
     }
-    public function setDated($dated) {
-        $this->dateCount += $dated;
-        $this->dated = $dated;
+    public function setNegotiated($isNegotiated) {
+        $this->negotiationCount += $isNegotiated;
+        $this->negotiated = $isNegotiated;
     }
 
     public function __toString() {
