@@ -139,10 +139,10 @@ abstract class MonteCarlo extends Rule
     public function getRemainPoints(\Lords $lords, \Turn $turn)
     {
         $remainActionCounts = $this->getRemainActionCounts($turn->getRemainTurns());
-        $weekDayPoints = $this->getWhichLord(
+        $daytimePoints = $this->getWhichLord(
             $remainActionCounts[\Turn::DAY_TIME], $lords
         );
-        $holidayPoints = array_map(
+        $nightPoints = array_map(
             function ($value) {
                 return $value * 2;
             },
@@ -154,8 +154,8 @@ abstract class MonteCarlo extends Rule
             function ($a, $b) {
                 return $a + $b;
             },
-            $weekDayPoints,
-            $holidayPoints
+            $daytimePoints,
+            $nightPoints
         );
         return $allPoints;
     }
