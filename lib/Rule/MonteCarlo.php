@@ -147,7 +147,7 @@ abstract class MonteCarlo extends Rule
      */
     public function getRemainPoints(\Lords $lords, \Turn $turn)
     {
-        $remainActionCounts = $this->getRemainActionCounts($turn->getRemainTurnsUntilNextAggreggate());
+        $remainActionCounts = $this->getRemainActionCounts($turn->getRemainTurns());
         $daytimePoints = $this->getWhichLord(
             $remainActionCounts[\Turn::DAY_TIME], $lords
         );
