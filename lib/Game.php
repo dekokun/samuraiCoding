@@ -42,7 +42,7 @@ class Game {
             // 6ターン目から一度情報が新しくなるためデート回数はリセットしておく
             if ($this->turn->getNextTurn() === 6) {
                 record('resetted');
-                $this->lords->resetNegotiationCount();
+                $this->lords->resetEstimatedNegotiationCount();
             }
             $lords
                 = $this->ruleSelector
@@ -81,7 +81,7 @@ class Game {
             if ($allDateCount) {
                 foreach ($this->lords as $i => $_) {
                     if ($allDateCount) {
-                        $this->lords[$i]->setNegotiated((integer)$dated[$i] / $allDateCount);
+                        $this->lords[$i]->setEstimatedNegotiationCountInTurn((integer)$dated[$i] / $allDateCount);
                     }
                 }
             }

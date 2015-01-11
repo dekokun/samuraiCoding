@@ -8,7 +8,7 @@ class Lord {
     private $revealedScores;
     private $realScore;
     private $negotiated;
-    private $negotiationCount = 0;
+    private $estimatedNegotiationCount = 0;
     private $index;
 
     function __construct(
@@ -89,16 +89,16 @@ class Lord {
         return $this->negotiated;
     }
 
-    public function resetNegotiationCount() {
-        return $this->negotiationCount = 0;
+    public function resetEstimatedNegotiationCount() {
+        return $this->estimatedNegotiationCount = 0;
     }
 
-    public function getNegotiationCount() {
-        return $this->negotiationCount;
+    public function getEstimatedNegotiationCount() {
+        return $this->estimatedNegotiationCount;
     }
-    public function setNegotiated($isNegotiated) {
-        $this->negotiationCount += $isNegotiated;
-        $this->negotiated = $isNegotiated;
+    public function setEstimatedNegotiationCountInTurn($estimatedNegotiationCount) {
+        $this->estimatedNegotiationCount += $estimatedNegotiationCount;
+        $this->negotiated = $estimatedNegotiationCount;
     }
 
     public function __toString() {

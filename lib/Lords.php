@@ -24,7 +24,7 @@ class Lords implements ArrayAccess, Iterator, Countable {
     public function allNegotiationCount() {
         $result = 0;
         foreach($this->lords as $lords) {
-            $result += $lords->getNegotiationCount();
+            $result += $lords->getEstimatedNegotiationCount();
         }
         return $result;
     }
@@ -83,9 +83,9 @@ class Lords implements ArrayAccess, Iterator, Countable {
         return min($this->getMilitaryCounts());
     }
 
-    public function resetNegotiationCount() {
+    public function resetEstimatedNegotiationCount() {
         foreach($this->lords as $lords) {
-            $lords->resetNegotiationCount();
+            $lords->resetEstimatedNegotiationCount();
         }
     }
 
