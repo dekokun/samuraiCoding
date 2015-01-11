@@ -28,7 +28,7 @@ abstract class MonteCarlo extends Rule
                 // 自分以外は、休日のデートはわからないため期待値を足す
                 foreach([1,2,3] as $playerIndex) {
                      $allRemainPoints[$playerIndex][$lord->getIndex()]
-                         += ($lord->getNegotiationCount() * 4);
+                         += ($lord->getEstimatedNegotiationCount() * 4);
                 }
                 // 自分以外のわかっている値を足す
                 foreach($lord->getRevealedScores() as $playerIndex => $point) {
