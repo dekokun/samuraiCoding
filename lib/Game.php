@@ -42,9 +42,9 @@ class Game {
             $rule = $this->ruleSelector
                 ->choice($this->lords, $this->turn);
 
-            // 6ターン目から一度情報が新しくなるためデート回数はリセットしておく
             if ($this->turn->getNextTurn() === 6) {
-                $this->lords->resetEstimatedNegotiationCount();
+                // 6ターン目から一度情報が新しくなるためデート回数はリセットしておきたかったがなぜか弱くなる
+                // $this->lords->resetEstimatedNegotiationCount();
                 $result = $rule->storeIntermediateResult($this->lords);
                 record($result);
             }
