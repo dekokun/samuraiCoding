@@ -106,6 +106,7 @@ abstract class MonteCarlo extends Rule
             $points[$index] = $lord->getRevealedScores();
         }
         $this->intermediateResult = $this->getPlayerMilitaryCounts($points, $lords);
+        return $this->intermediateResult;
     }
 
     /**
