@@ -86,12 +86,12 @@ abstract class MonteCarlo extends Rule
     public function isTop(\Lords $lords, array $points, array $choice, $firstFlag) {
         // $pointsは次のターンの自分の行動分の得点が含まれていないため、その代わりに自分が選んだ行動の得点を足す
         $points = $this->reflectMyChoice($points, $choice);
-        $result = $this->getPlayerMilitaryCounts($points, $lords);
+        $lastTurnResult = $this->getPlayerMilitaryCounts($points, $lords);
         $result = array_map(
             function($val1, $val2) {
                 return $val1 + $val2;
             },
-            $result,
+            $lastTurnResult,
             $this->intermediateResult
         );
         if ($result[0] === max($result)) {
