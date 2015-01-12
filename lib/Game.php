@@ -39,15 +39,12 @@ class Game {
 
         for ($i = 0; $i < $this->setting->maxTurn; $i++) {
             $this->readData();
-            // 6ターン目から一度情報が新しくなるためデート回数はリセットしておく
-            if ($this->turn->getNextTurn() === 6) {
-                record('resetted');
-                // resetしたらなぜか弱くなった…理由不明…
-                // $this->lords->resetEstimatedNegotiationCount();
-            }
             $rule = $this->ruleSelector
                 ->choice($this->lords, $this->turn);
+
+            // 6ターン目から一度情報が新しくなるためデート回数はリセットしておく
             if ($this->turn->getNextTurn() === 6) {
+                $this->lords->resetEstimatedNegotiationCount();
                 $result = $rule->storeIntermediateResult($this->lords);
                 record($result);
             }
